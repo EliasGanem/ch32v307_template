@@ -12,8 +12,8 @@ SIZE = $(PREFIX)size
 ARCH_FLAGS = -march=rv32imafc -mabi=ilp32f
 
 # Directorios
-INC_FLAGS = -Iinclude -Ivendor/Core -Ivendor/Peripheral/inc
-LD_SCRIPT = CH32V30x_flash.ld
+INC_FLAGS = -Iinc -Ivendor/Core -Ivendor/Debug -Ivendor/Peripheral/inc
+LD_SCRIPT = vendor/Ld/Link.ld
 
 # Flags de compilación
 CFLAGS = $(ARCH_FLAGS) $(INC_FLAGS) -O2 -g -Wall
@@ -21,7 +21,7 @@ LDFLAGS = $(ARCH_FLAGS) -T $(LD_SCRIPT) -nostartfiles -Wl,--gc-sections
 
 # Archivos fuente (Busca todos los .c en src y vendor)
 SRCS = $(wildcard src/*.c) $(wildcard vendor/Peripheral/src/*.c) $(wildcard vendor/Core/*.c)
-SRCS += vendor/Startup/startup_ch32v30x.s
+SRCS += vendor/Startup/startup_ch32v30x_D8.s
 
 OBJS = $(SRCS:.c=.o)
 OBJS := $(OBJS:.s=.o)
