@@ -23,6 +23,7 @@ LDFLAGS = $(ARCH_FLAGS) -T $(LD_SCRIPT) -nostartfiles -Wl,--gc-sections
 SRCS = $(wildcard src/*.c) \
        $(wildcard vendor/Peripheral/src/*.c) \
        $(wildcard vendor/Core/*.c) \
+	   $(wildcard vendor/Debug/*.c) \
        vendor/Startup/startup_ch32v30x_D8.s
 
 # Generación de la lista de objetos en la carpeta build
@@ -59,7 +60,7 @@ $(BUILD_DIR)/%.o: %.s
 # Programación con OpenOCD
 download: all
 	$(OPENOCD_BIN) -f /opt/wch/openocd/bin/wch-riscv.cfg -c "program $(BUILD_DIR)/$(TARGET).elf verify reset exit"
-	
+
 # Limpieza total de la carpeta build
 clean:
 	rm -rf $(BUILD_DIR)
